@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+
+
+<!--         <record model="ir.ui.view" id="instance_request_search">-->
+<!--            <field name="name">Instance requests</field>-->
+<!--            <field name="model">instance.request</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search>-->
+<!--                    <field name="name"/>-->
+<!--                </search>-->
+<!--                <search>-->
+<!--                    <field name="address_ip"/>-->
+<!--                </search>-->
+<!--                <search>-->
+<!--                    <field name="state"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record model="ir.ui.view" id="instance_request_list">
+            <field name="name">Instance Requests</field>
+            <field name="model">instance.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_uid"/>
+                    <field name="name"/>
+                    <field name="limit_date"/>
+                    <field name="cpu"/>
+                    <field name="ram"/>
+                    <field name="disk"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="instance_request_form">
+            <field name="name">Les instances</field>
+            <field name="model">instance.request</field>
+            <field name="arch" type="xml">
+                <form string="Idea form">
+                    <group colspan="4">
+                        <field name="name"/>
+                        <field name="address_ip"/>
+                        <field name="active"/>
+                        <field name="cpu"/>
+                        <field name="ram"/>
+                        <field name="disk"/>
+                        <field name="url"/>
+                        <field name="state"/>
+                        <field name="limit_date"/>
+                        <field name="treat_date"/>
+                        <field name="treat_duration"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.actions.act_window" id="instance_request_action">
+            <field name="name">Demande de creation</field>
+            <field name="res_model">instance.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="instance_request"
+                  id="menu_root1"
+                  action="instance_request.instance_request_action"
+        />
+
+    </data>
+</odoo>

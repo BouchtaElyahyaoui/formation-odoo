@@ -30,8 +30,12 @@
             <field name="model">odoo.version</field>
             <field name="arch" type="xml">
                 <search>
-                     <field name="name"/>
+                    <field name="name"/>
+                </search>
+                <search>
                     <field name="create_date"/>
+                </search>
+                <search>
                     <field name="create_uid"/>
                 </search>
             </field>

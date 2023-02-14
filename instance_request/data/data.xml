@@ -10,4 +10,8 @@
     <record id="odoo_version3" model="odoo.version">
         <field name="name">16.0</field>
     </record>
+
+     <record id="instance_request1" model="instance.request">
+        <field name="name">First instance</field>
+    </record>
 </odoo>
