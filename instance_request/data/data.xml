@@ -2,6 +2,12 @@
 
 <odoo>
     <record id="odoo_version1" model="odoo.version">
-        <field name="name">16</field>
+        <field name="name">14.0</field>
+    </record>
+    <record id="odoo_version2" model="odoo.version">
+        <field name="name">15.0</field>
+    </record>
+    <record id="odoo_version3" model="odoo.version">
+        <field name="name">16.0</field>
     </record>
 </odoo>
