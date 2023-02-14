@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="odoo_version1" model="odoo.version">
+        <field name="name">16</field>
+    </record>
+</odoo>
