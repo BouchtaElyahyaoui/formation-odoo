@@ -2,21 +2,21 @@
     <data>
 
 
-<!--         <record model="ir.ui.view" id="instance_request_search">-->
-<!--            <field name="name">Instance requests</field>-->
-<!--            <field name="model">instance.request</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <search>-->
-<!--                    <field name="name"/>-->
-<!--                </search>-->
-<!--                <search>-->
-<!--                    <field name="address_ip"/>-->
-<!--                </search>-->
-<!--                <search>-->
-<!--                    <field name="state"/>-->
-<!--                </search>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--         <record model="ir.ui.view" id="instance_request_search">-->
+        <!--            <field name="name">Instance requests</field>-->
+        <!--            <field name="model">instance.request</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <search>-->
+        <!--                    <field name="name"/>-->
+        <!--                </search>-->
+        <!--                <search>-->
+        <!--                    <field name="address_ip"/>-->
+        <!--                </search>-->
+        <!--                <search>-->
+        <!--                    <field name="state"/>-->
+        <!--                </search>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <record model="ir.ui.view" id="instance_request_list">
             <field name="name">Instance Requests</field>
@@ -57,18 +57,30 @@
         </record>
 
 
-
-
         <record model="ir.actions.act_window" id="instance_request_action">
             <field name="name">Demande de creation</field>
             <field name="res_model">instance.request</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="instance_request"
+        <menuitem name="Instance Request"
                   id="menu_root1"
                   action="instance_request.instance_request_action"
         />
+
+
+        <menuitem id="menu_demandes" name="Mes demandes" parent="menu_root1"
+                  action="instance_request.instance_request_action"/>
+
+        <menuitem id="Responsables" name="Responsables" parent="menu_root1"
+                  action="instance_request.instance_request_action"/>
+
+        <menuitem id="Analyse" name="Analyse" parent="menu_root1"
+                  action="instance_request.instance_request_action"/>
+
+        <menuitem id="Configuration" name="Configuration" parent="menu_root1"
+                  action="instance_request.instance_request_action"/>
+
 
     </data>
 </odoo>
