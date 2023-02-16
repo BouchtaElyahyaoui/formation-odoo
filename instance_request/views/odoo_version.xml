@@ -31,11 +31,9 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
-                </search>
-                <search>
+
                     <field name="create_date"/>
-                </search>
-                <search>
+
                     <field name="create_uid"/>
                 </search>
             </field>
@@ -49,6 +47,7 @@
 
         <menuitem name="odoo_version"
                   id="menu_root"
+                  parent="Configuration"
                   action="instance_request.odoo_version_action"
         />
 
