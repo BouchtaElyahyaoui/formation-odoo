@@ -76,6 +76,7 @@
             <field name="name">Demande de creation</field>
             <field name="res_model">instance.request</field>
             <field name="domain">[('create_uid', '=', uid)]</field>
+            <field name="context">{'default_cpu':'i5 7eme Gen'}</field>
             <field name="view_mode">tree,form</field>
         </record>
 
