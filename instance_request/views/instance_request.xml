@@ -45,23 +45,23 @@
             <field name="arch" type="xml">
                 <form string="Idea form">
                     <header>
-                            <button string="Set to draft" type="object" states="submited,done" name="action_brouillon"
-                                    class="oe_highlight"/>
-                            <button string="Submit" type="object" states="draft,inprogress" name="action_soumise"
-                                    class="oe_highlight"/>
-                            <button string="Set to progress" type="object" states="submited" name="action_en_traitement"
-                                    class="oe_highlight"/>
-                            <button string="Done" type="object" states="inprogress" name="action_traitée"
-                                    class="oe_highlight"/>
-                            <field name="state" widget="statusbar" />
-                        </header>
+                        <button string="Set to draft" type="object" states="submited,done" name="action_brouillon"
+                                class="oe_highlight"/>
+                        <button string="Submit" type="object" states="draft,inprogress" name="action_soumise"
+                                class="oe_highlight"/>
+                        <button string="Set to progress" type="object" states="submited" name="action_en_traitement"
+                                class="oe_highlight"/>
+                        <button string="Done" type="object" states="inprogress" name="action_traitée"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
                                 <field name="name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="address_ip" states="done"
                                        attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                <field name="active"  attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="active" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="cpu" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="ram" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="disk" attrs="{'readonly': [('state', '=', 'done')]}"/>
@@ -115,10 +115,15 @@
 
 
         <menuitem id="menu_demandes" name="Mes demandes" parent="instance_request.menu_root1"
-                  action="instance_request.instance_request_action"/>
+                  action="instance_request.instance_request_action"
+                  groups="instance_request.group_instance_request_user"
+        />
 
         <menuitem id="Responsables" name="Responsables" parent="menu_root1"
-                  action="instance_request.instance_request_action"/>
+                  action="instance_request.instance_request_action"
+                  groups="instance_request.group_instance_request_responsable"
+        />
+
         <menuitem id="to_validate" name="À valider" parent="Responsables"
                   action="instance_request.instance_request_action_responsables_to_validate"/>
         <menuitem id="all" name="Toutes" parent="Responsables"
@@ -128,7 +133,9 @@
                   action="instance_request.instance_request_action"/>
 
         <menuitem id="Configuration" name="Configuration" parent="menu_root1"
-                  action="instance_request.instance_request_action"/>
+                  action="instance_request.instance_request_action"
+                  groups="instance_request.group_instance_request_admin"
+        />
 
 
     </data>
