@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from odoo import api, fields, models
 
 
@@ -5,35 +6,36 @@ class InstanceRequest(models.Model):
     _name = "instance.request"  # odoo will create a postgres table (hospital_patient
     _description = "All instance requests"
     name = fields.Char(string='Designation')
-    address_ip = fields.Char(string='Adresse IP')
+    address_ip = fields.Char(string='IP Address')
     active = fields.Boolean(string='Actif', default=True)
-    cpu = fields.Char(string='cpu')
-    ram = fields.Char(string='ram')
-    disk = fields.Char(string='disk')
-    url = fields.Char(string='url')
+    cpu = fields.Char(string='CPU')
+    ram = fields.Char(string='RAM')
+    disk = fields.Char(string='DISK')
+    url = fields.Char(string='URL')
     state = fields.Selection([
-        ('brouillon', 'Brouillon'),
-        ('soumise', 'Soumise'),
-        ('en_traitement', 'En_Traitement'),
-        ('traitée', 'Traitée')
+        ('draft', 'Draft'),
+        ('submited', 'Submited'),
+        ('inprogress', 'In Progress'),
+        ('done', 'Done')
     ], string='Statut'
-        , default="brouillon")
-    limit_date = fields.Date(string='Date limite de traitement')
-    treat_date = fields.Date(string='Date de Traitement')
-    treat_duration = fields.Float(string='Durée de traitement')
+        , default="draft")
+    limit_date = fields.Date(string='Processing Deadline')
+    treat_date = fields.Date(string='Processing Date')
+    treat_duration = fields.Float(string='Processing Period')
+
 
     def action_brouillon(self):
         for record in self:
-            record.state = 'brouillon'
+            record.state = 'draft'
 
     def action_soumise(self):
         for record in self:
-            record.state = 'soumise'
+            record.state = 'submited'
 
     def action_en_traitement(self):
         for record in self:
-            record.state = 'en_traitement'
+            record.state = 'inprogress'
 
     def action_traitée(self):
         for record in self:
-            record.state = 'traitée'
+            record.state = 'done'
