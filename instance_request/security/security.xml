@@ -35,7 +35,30 @@
                     eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
             />
             <field name="implied_ids" eval="[(4, ref('group_instance_request_responsable'))]"/>
-
         </record>
+
+
+        <record id="see_only_my_records" model="ir.rule">
+            <field name="name">See only my records</field>
+            <field name="model_id" ref="instance_request.model_instance_request"/>
+            <field name="groups" eval="[(4, ref('instance_request.group_instance_request_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">[('create_uid','=',user.id)]</field>
+        </record>
+
+        <record id="see_all_records" model="ir.rule">
+            <field name="name">See all records</field>
+            <field name="model_id" ref="instance_request.model_instance_request"/>
+            <field name="groups" eval="[(4, ref('instance_request.group_instance_request_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
     </data>
 </odoo>

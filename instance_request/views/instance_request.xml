@@ -77,6 +77,11 @@
                             </group>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -85,7 +90,7 @@
         <record model="ir.actions.act_window" id="instance_request_action">
             <field name="name">Demande de creation</field>
             <field name="res_model">instance.request</field>
-            <field name="domain">[('create_uid', '=', uid)]</field>
+            <!--            <field name="domain">[('create_uid', '=', uid)]</field>-->
             <field name="context">{'default_cpu':'i5 7eme Gen'}</field>
             <field name="view_mode">tree,form</field>
         </record>

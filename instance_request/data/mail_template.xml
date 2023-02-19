@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<odoo>
+    <data>
+        <record id="instance_request_creation" model="mail.template">
+            <field name="name">Instance Request</field>
+            <field name="model_id" ref="instance_request.model_instance_request"/>
+            <field name="subject">{{ object.name }}</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="description">Inform the user about the creation of his instance</field>
+            <field name="body_html" type="html">
+                <div>
+                    Bonjour,
+                    <br/>
+                    <br/>
+                    Votre instance
+                    <strong>
+                        <t t-out="object.name"/>
+                    </strong>
+                    a bien été crée. Elle est accessible sur le lien
+                    <span t-out="object.address_ip"/>
+                    <br/>
+                    <br/>
+
+                    Cordialement,
+                    <br/>
+                </div>
+
+            </field>
+        </record>
+        <record id="instance_request_creation_progress" model="mail.template">
+            <field name="name">Instance Request</field>
+            <field name="model_id" ref="instance_request.model_instance_request"/>
+            <field name="subject">{{ object.name }}</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="description">Inform the user about the creation of his instance</field>
+            <field name="body_html" type="html">
+                <div>
+                    Dear,
+                    <br/>
+                    <br/>
+                    Bonjour, Veuillez bien créer une instance
+                    <strong>
+                        <t t-out="object.name"/>
+                    </strong>
+                    avec comme performances :
+                    <table>
+                        <tr>
+                            <th>CPU</th>
+                            <th>RAM</th>
+                            <th>DISK</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <t t-out="object.cpu"/>
+                            </td>
+                            <td>
+                                <t t-out="object.ram"/>
+                            </td>
+                            <td>
+                                <t t-out="object.disk"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+
+                    Cordialement,
+                    <br/>
+                </div>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
