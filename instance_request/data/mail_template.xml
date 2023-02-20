@@ -22,11 +22,9 @@
                     <span t-out="object.address_ip"/>
                     <br/>
                     <br/>
-
-                    Cordialement,
+                    Cordialement
                     <br/>
                 </div>
-
             </field>
         </record>
         <record id="instance_request_creation_progress" model="mail.template">

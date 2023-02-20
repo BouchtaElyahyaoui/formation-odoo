@@ -26,6 +26,7 @@
                     <field name="cpu"/>
                     <field name="ram"/>
                     <field name="disk"/>
+                    <field name="activity_ids"  widget="list_activity"/>
                     <field name="state"/>
                     <!--                    <button string="Set to draft" type="object" name="action_brouillon"-->
                     <!--                                class="oe_highlight" />-->
@@ -59,7 +60,7 @@
                         <group>
                             <group>
                                 <field name="name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                <field name="address_ip" states="done"
+                                <field name="address_ip" states="done,draft"
                                        attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="active" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="cpu" attrs="{'readonly': [('state', '=', 'done')]}"/>
