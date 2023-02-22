@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <menuitem name="Permietres"
+                  id="perimetre_id"
+                  action="instance_request.instance_request_action"
+                  groups="instance_request.group_instance_request_admin"
+                  parent="instance_request.Configuration"
+        />
+    </data>
+
+</odoo>
+

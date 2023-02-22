@@ -11,6 +11,8 @@
                     <field name="name"/>
                     <field name="address_ip"/>
                     <field name="state"/>
+                    <field name="partner_id"/>
+                    <field name="odoo_id"/>
                 </search>
             </field>
         </record>
@@ -19,15 +21,19 @@
             <field name="name">Instance Requests</field>
             <field name="model">instance.request</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree editable="bottom">
                     <field name="create_uid"/>
                     <field name="name"/>
                     <field name="limit_date"/>
                     <field name="cpu"/>
                     <field name="ram"/>
                     <field name="disk"/>
-                    <field name="activity_ids"  widget="list_activity"/>
+                    <field name="partner_id"/>
+                    <!--                    <field name="tl_id"/>-->
+                    <field name="odoo_id"/>
+                    <field name="activity_ids" widget="list_activity"/>
                     <field name="state"/>
+                    <field name="nb_lines"/>
                     <!--                    <button string="Set to draft" type="object" name="action_brouillon"-->
                     <!--                                class="oe_highlight" />-->
                     <!--                        <button string="Submit" type="object" name="action_soumise"-->
@@ -75,8 +81,23 @@
                                        attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="treat_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="perimeters" readonly="1"/>
+                                <field name="partner_id"/>
+                                <field name="odoo_id"/>
+                                <field name="nb_lines" readonly="1"/>
+                                <field name="request_line_ids"/>
+                                <!--                                <field name="tl_id"/>-->
                             </group>
                         </group>
+                        <notebook>
+                            <page>
+                                <field name="request_line_ids">
+                                    <tree>
+                                        <field name="instances_ids"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>

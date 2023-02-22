@@ -4,7 +4,7 @@
     <data>
         <record id="mail_activity_instance_limit_date_changed" model="mail.activity.type">
             <field name="name">To Process with limit date</field>
-            <field name="icon">fa-university</field>
+            <field name="icon">fa-bell-o</field>
             <field name="decoration_type">warning</field>
             <field name="res_model">instance.request</field>
         </record>

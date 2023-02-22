@@ -2,6 +2,7 @@
 import datetime
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class InstanceRequest(models.Model):
@@ -24,7 +25,38 @@ class InstanceRequest(models.Model):
         , default="draft", tracking=True)
     limit_date = fields.Date(string='Processing Deadline', tracking=True)
     treat_date = fields.Date(string='Processing Date')
-    treat_duration = fields.Float(string='Processing Period')
+    treat_duration = fields.Float(compute="_compute_treat_duration", string='Processing Period', store=1)
+    partner_id = fields.Many2one('res.partner', string="Partner")
+    tl_id = fields.Many2one('hr.employee', string="Employee")
+    # tl_user_id = fields.Many2one('hr.employee', string="")
+    odoo_id = fields.Many2one('odoo.version', string="Odoo Version")
+    perimeters_ids = fields.One2many('perimeter', 'instance_id', string="Perimeters")
+    request_line_ids = fields.One2many('hr.employee', 'instances_ids', string="lines")
+    nb_lines = fields.Integer(string="Nb lines", compute="_compute_nb_lines")
+    perimeters = fields.Integer(compute='_compute_perimeters', string="Number of Perimeters")
+
+    @api.depends('request_line_ids')
+    def _compute_nb_lines(self):
+        for r in self:
+            r.nb_lines = len(r.request_line_ids)
+
+    @api.depends('perimeters_ids')
+    def _compute_perimeters(self):
+        for r in self:
+            print(len(r.perimeters_ids))
+            r.perimeters = len(r.perimeters_ids)
+
+    @api.depends('treat_date')
+    def _compute_treat_duration(self):
+        for r in self:
+            if r.treat_date:
+                d1 = datetime.datetime.strptime(r.treat_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
+                d2 = datetime.datetime.strptime(datetime.datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
+                r.treat_duration = abs((d2 - d1).days)
+
+    _sql_constraints = [
+        ("uniq_ip_address", "unique(address_ip)", "Address Ip already in use")
+    ]
 
     @api.model
     def create(self, vals):
@@ -34,22 +66,22 @@ class InstanceRequest(models.Model):
 
     def write(self, vals):
         print('Write method is being triggered', vals.get('limit_date'))
-        if datetime.datetime.strptime(vals.get('limit_date'), '%Y-%m-%d') < datetime.datetime.today():
-            raise Warning("You can not choose a date less than today's date !")
-        users = self.env.ref('instance_request.group_instance_request_responsable').users
-        for user in users:
-            self.activity_schedule(
-                'mail.mail_activity_instance_limit_date_changed',
-                user_id=user.id,
-                note='The limit date is assigned to all the users of responsable group',
-                date_deadline=datetime.datetime.strptime(vals.get('limit_date'), '%Y-%m-%d')
-            )
-        print('end of write method')
+        if vals.get('limit_date') and type(vals.get('limit_date')) == str:
+            if datetime.datetime.strptime(vals.get('limit_date'), '%Y-%m-%d') < datetime.datetime.today():
+                raise UserError("You can not choose a date less than today's date !")
+            users = self.env.ref('instance_request.group_instance_request_responsable').users
+            for user in users:
+                self.activity_schedule(
+                    'mail.mail_activity_instance_limit_date_changed',
+                    user_id=user.id,
+                    note='The limit date is assigned to all the users of responsable group',
+                    date_deadline=datetime.datetime.strptime(vals.get('limit_date'), '%Y-%m-%d')
+                )
         return super(InstanceRequest, self).write(vals)
 
     def unlink(self):
         if self.state != 'draft':
-            raise Warning("You can only delete records in 'draft' state !")
+            raise UserError("You can only delete records in 'draft' state !")
         else:
             return super().unlink()
 

@@ -11,6 +11,25 @@
         <field name="name">16.0</field>
     </record>
 
+    <record id="perim1" model="perimeter">
+        <field name="name">Achats</field>
+    </record>
+    <record id="perim2" model="perimeter">
+        <field name="name">Ventes</field>
+    </record>
+    <record id="perim3" model="perimeter">
+        <field name="name">Documents</field>
+    </record>
+    <record id="perim4" model="perimeter">
+        <field name="name">Projets</field>
+    </record>
+    <record id="perim5" model="perimeter">
+        <field name="name">Agriculture</field>
+    </record>
+
+
+
+
 <!--     <record id="instance_request1" model="instance.request">-->
 <!--        <field name="name">First instance</field>-->
 <!--    </record>-->
